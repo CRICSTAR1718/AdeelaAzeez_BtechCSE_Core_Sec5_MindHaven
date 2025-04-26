@@ -6,7 +6,7 @@
 
 ## 📽️ Video Demonstration  
 🎥 Watch the project walkthrough here:  
-[👉 MindHaven - Video Presentation]([Watch Here](https://github.com/CRICSTAR1718/MindHaven/blob/main/G4_SecE_Video%20Presentation_MindHaven.mp4))
+[👉 MindHaven - Video Presentation]([Watch Here](https://github.com/CRICSTAR1718/AdeelaAzeez_BtechCSE_Core_Sec5_MindHaven/blob/main/G4_SecE_Video%20Presentation_MindHaven.mp4))
 
 ---
 
