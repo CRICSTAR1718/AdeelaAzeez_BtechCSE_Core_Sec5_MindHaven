@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-*z!(9b8^7pngo=*o%%g)k_^cp%u39j4lc)b(*7+snz4iut%@ic
 DEBUG = True
 
 
-ALLOWED_HOSTS = ['your-app-name.onrender.com', 'localhost', '127.0.0.1']
+ALLOWED_HOSTS = ['mindhaven-wgjs.onrender.com', 'localhost', '127.0.0.1']
 # Application definition
 
 INSTALLED_APPS = [
