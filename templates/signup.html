@@ -1,0 +1,84 @@
+<!--signup.html-->
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" type="text/css" href="signup.css">
+	<title>Sign Up</title>
+</head>
+<body>
+	<div class="container">
+		<h2>Sign Up</h2>
+		<form action="/submit_signup" method="post">
+			<div class="form-group">
+				<label for="fname">First Name:</label>
+				<input type="text" id="fname" name="fname" required>
+			</div>
+			<div class="form-group">
+				<label for="lname">Last Name:</label>
+	<input type="text" id="lname" name="lname" required>
+			</div>
+			<div class="form-group">
+				<label for="email">Email:</label>
+				<input type="email" id="email" name="email" required>
+			</div>
+			<div class="form-group">
+				<label for="password">Password:</label>
+				<input type="password" id="password" name="password" required>
+			</div>
+			<button type="submit">Sign Up</button>
+		</form>
+	</div>
+</body>
+<script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
+<script src="https://files.bpcontent.cloud/2025/03/25/13/20250325135759-7PRDTQ1T.js"></script>
+</html>
+<style>
+	body {
+	font-family: Arial, sans-serif;
+	background-color: #f2f2f2;
+}
+
+.container {
+	width: 300px;
+	background-color: #fff;
+	padding: 20px;
+	margin: 140px auto;
+	box-shadow: 0px 0px 10px rgba(0,0,0,0.1);
+}
+
+h2 {
+	text-align: center;
+	margin-bottom: 30px;
+}
+
+.form-group {
+	margin-bottom: 20px;
+}
+
+label {
+	display: block;
+	margin-bottom: 5px;
+}
+
+input[type="text"], input[type="email"], input[type="password"] {
+	width: 100%;
+	padding: 10px;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+button[type="submit"] {
+	background-color:#2691d9;
+	color: #fff;
+	border: none;
+	padding: 10px 20px;
+	border-radius: 4px;
+	cursor: pointer;
+	width: 100%;
+}
+
+button[type="submit"]:hover {
+	background-color: #45a049;
+}
+</style>

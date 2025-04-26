@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Journal Existing</title>
+  <link rel="stylesheet" href="/static/firstpage.css">
+  <style>
+    * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+  }
+  
+  .container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 30px auto;
+
+  }
+  
+
+  .diary-entry {
+    background-color: white;
+    border-radius: 10px;
+    margin-top: 20px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .entry-date {
+    font-size: 12px;
+    color: #7f8c8d;
+  }
+  
+  .entry-title {
+    font-size: 18px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+  
+  .entry-text {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-top: 10px;
+  }
+  
+  .mood-icons {
+    margin-top: 15px;
+  }
+  
+  .mood-icon {
+    font-size: 30px;
+  }
+  
+  footer {
+    background-color: #ecf0f1;
+    padding: 15px;
+    display: flex;
+    justify-content: space-around;
+  }
+  
+  .footer-icons button {
+    background-color: transparent;
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+  }
+  
+  .footer-icons button:hover {
+    color: #3498db;
+  }
+  .addnewentrybutton {
+    margin-top: 15px;
+    text-align: right;
+    margin-right: 10px;
+}
+
+.addnewentrybutton button {
+    padding: 10px 15px;
+    background-color: #3498db;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.addnewentrybutton button a {
+    text-decoration: none;
+    color: white;
+}
+
+.addnewentrybutton button:hover {
+    background-color: #2980b9;
+}
+
+  </style>
+</head>
+<body>
+    <div class="header">
+
+        <header class="header-content">
+
+            <a href="#logo" class="logo">
+                <img src="/static/logo without caption.png" alt="logoImage" class="logo-icon" />
+                <span class="logo-text">MindHaven: Track, Reflect, Heal</span>
+            </a>
+
+            <nav class="nav">
+                <a href="home" class="nav-link">Home</a>
+                <a href="journal" class="nav-link">Journaling</a>
+                <a href="moodtracker" class="nav-link">Mood-Tracking</a>
+                <a href="blogweb" class="nav-link">Blog</a>
+                <a href="#about" class="nav-link">About</a>
+            </nav>
+
+            <a href="#contact" class="contact-button">
+                Contact Us
+            </a>
+
+            <button type="button" class="menu-button">
+                <img src="/static/Hamburger.svg" alt="menuButton" class="menu-icon" />
+            </button>
+
+        </header>
+
+    </div>
+
+  <div class="container">
+    <div class="addnewentrybutton">
+        <button><a href="newjournal">New Entry</a></button>
+    </div>
+    <div id="entries-container"></div>
+  </div>
+  <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
+  <script src="https://files.bpcontent.cloud/2025/03/25/13/20250325135759-7PRDTQ1T.js"></script>
+  <script>
+    function getCookie(name) {
+        let cookieValue = null;
+        if (document.cookie && document.cookie !== '') {
+            const cookies = document.cookie.split(';');
+            for (let i = 0; i < cookies.length; i++) {
+                const cookie = cookies[i].trim();
+                if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                    cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                    break;
+                }
+            }
+        }
+        return cookieValue;
+    }
+
+    function loadEntries() {
+        fetch('/get_journal_entries/')
+            .then(response => response.json())
+            .then(data => {
+                const entriesContainer = document.getElementById('entries-container');
+                entriesContainer.innerHTML = '';
+                
+                if (data.entries && Array.isArray(data.entries)) {
+                    data.entries.forEach(entry => {
+                        const entryDiv = document.createElement('section');
+                        entryDiv.className = 'diary-entry';
+                        entryDiv.innerHTML = `
+                            <div class="entry-date">
+                                <span class="date">${entry.date}</span>
+                            </div>
+                            <div class="entry-text">${entry.content}</div>
+                            <div class="mood-icons">
+                                <span class="mood-icon">📝</span>
+                            </div>
+                        `;
+                        entriesContainer.appendChild(entryDiv);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error loading entries:', error);
+            });
+    }
+
+    document.addEventListener('DOMContentLoaded', function() {
+        // Load entries from database
+        loadEntries();
+
+        // Check if there are entries in localStorage
+        let entries = JSON.parse(localStorage.getItem('journalEntries')) || [];
+        const container = document.querySelector('.container');
+
+        entries.forEach(entry => {
+            let entryDiv = document.createElement('section');
+            entryDiv.classList.add('diary-entry');
+            entryDiv.innerHTML = `
+                <div class="entry-date">
+                    <span class="date">${entry.date}</span>
+                </div>
+                <h2 class="entry-title">${entry.title}</h2>
+                <p class="entry-text">${entry.content}</p>
+                <div class="mood-icons">
+                    <span class="mood-icon">📝</span>
+                </div>
+            `;
+            container.appendChild(entryDiv);
+        });
+    });
+  </script>
+
+
+</body>
+</html>

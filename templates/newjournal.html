@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Note App</title>
+  <link rel="stylesheet" href="/static/newjournal.css">
+</head>
+<body>
+  <div class="container">
+    <!-- Header -->
+    <header class="header">
+        <div class="header-left">
+          <button class="back-btn"><a href="journal">←</a></button>
+          <div>
+            <input type="date" id="noteDate" class="date-picker">
+          </div>
+        </div>
+        <button class="save-btn">Save</button>
+      </header>
+      
+
+    <!-- Main Content -->
+    <main class="content">
+      <input type="text" id="title" placeholder="Title" class="title-input">
+      <textarea id="noteContent" placeholder="Start typing here..." class="content-input"></textarea>
+    </main>
+
+    <!-- Footer Navigation -->
+    <footer class="footer">
+      <button><img src="/static/documenticon.webp" alt="Document Icon" id="documenticon"></button>
+      <button><img src="/static/imageicon.jpeg" alt="Image Icon" id="imageicon"></button>
+      <button><img src="/static/cameraicon.jpeg" alt="Camera Icon" id="cameraicon"></button>
+      <button><img src="/static/smileicon.jpeg" alt="Smile Icon" id="smileicon"></button>
+    </footer>
+  </div>
+
+        <script>
+        const saveButton = document.querySelector('.save-btn');
+        saveButton.addEventListener('click', function () {
+            const title = document.getElementById('title').value;
+            const content = document.getElementById('noteContent').value;
+            const date = document.getElementById('noteDate').value;
+
+            if (title && content && date) {
+                let entries = JSON.parse(localStorage.getItem('journalEntries')) || [];
+                entries.push({ date: date, title: title, content: content, type: 'diary-entry' });
+                localStorage.setItem('journalEntries', JSON.stringify(entries));
+                window.location.href = "journal"; // Redirect to the journal page
+            } else {
+                alert("Please fill in the title, content, and date before saving.");
+            }
+        });
+  </script>
+   <script src="https://cdn.botpress.cloud/webchat/v2.3/inject.js"></script>
+   <script src="https://files.bpcontent.cloud/2025/03/25/13/20250325135759-7PRDTQ1T.js"></script>
+   
+</body>
+</html>

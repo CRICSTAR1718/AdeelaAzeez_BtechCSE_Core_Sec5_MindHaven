@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <section class="diary-entries">
+        <h2>Diary Entries</h2>
+        <div id="entriesContainer"></div>
+    </section>
+    <script>
+        const saveButton = document.querySelector('.save-btn');
+saveButton.addEventListener('click', function () {
+    const title = document.getElementById('title').value;
+    const content = document.getElementById('noteContent').value;
+    const date = document.getElementById('noteDate').value;
+
+    if (title && content) {
+        let entries = JSON.parse(localStorage.getItem('journalEntries')) || [];
+        entries.push({ date: date, title: title, content: content, type: 'diary-entry' });
+        localStorage.setItem('journalEntries', JSON.stringify(entries));
+        window.location.href = "journalexisting.html"; // Redirect to the journal page
+    } else {
+        alert("Please fill in both title and content before saving.");
+    }
+});
+    </script>
+</body>
+</html>
